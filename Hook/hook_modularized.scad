@@ -171,8 +171,8 @@ module flat_hook2(hook_offset, width, thickness, extra_height=0) {
 module dyson_d_pipe_vertical(center_offset) {
     thickness = 3;
     d_pipe_outer_radius = 35/2;
-    d_pipe_inner_r1 = 31/2;
-    d_pipe_inner_r2 = 28/2;
+    d_pipe_inner_r1 = 30/2;
+    d_pipe_inner_r2 = 27/2;
     d_shape_offset = 9;
     round_radius = thickness/2;
     rack_flat_depth = center_offset+d_pipe_outer_radius;
@@ -197,11 +197,24 @@ module dyson_d_pipe_vertical(center_offset) {
     }
 }
 
-translate([0, 0, 5]) {
+translate([-100, -100, 5]) {
+    translate([0, 0, 0])
     dyson_d_pipe_vertical(center_offset = 25);
 
     translate([0, 80, 0])
     dyson_d_pipe_vertical(center_offset = 25);
+
+    translate([0, 160, 0])
+    dyson_d_pipe_vertical(center_offset = 25);
+    
+    translate([80, 0, 0])
+    dyson_d_pipe_vertical(center_offset = 25);
+
+    translate([80, 80, 0])
+    dyson_d_pipe_vertical(center_offset = 25);
+
+    translate([80, 160, 0])
+    dyson_d_pipe_vertical(center_offset = 40);
 }
 
 translate([100, 100, 0])
