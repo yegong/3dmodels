@@ -201,21 +201,21 @@ translate([-100, -100, 5]) {
     translate([0, 0, 0])
     dyson_d_pipe_vertical(center_offset = 25);
 
-    translate([0, 80, 0])
+    translate([0, 70, 0])
     dyson_d_pipe_vertical(center_offset = 25);
 
-    translate([0, 160, 0])
+    translate([0, 140, 0])
     dyson_d_pipe_vertical(center_offset = 25);
     
     translate([80, 0, 0])
     dyson_d_pipe_vertical(center_offset = 25);
 
-    translate([80, 80, 0])
+    translate([80, 70, 0])
     dyson_d_pipe_vertical(center_offset = 25);
 
-    translate([80, 160, 0])
+    translate([80, 140, 0])
     dyson_d_pipe_vertical(center_offset = 40);
 }
 
-translate([100, 100, 0])
+translate([0, 0, 0])
 sphere(r=1);
