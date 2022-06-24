@@ -1,6 +1,6 @@
 $fs = 0.1;
 $fa = 3;
-$espsilon = 0.01;
+$epsilon = 0.01;
 
 peg_radius = 2.45;
 board_thickness = 1;
@@ -192,7 +192,7 @@ module dyson_d_pipe_vertical(center_offset) {
         difference() {
             cylinder(h = rack_height, r1=d_pipe_inner_r1, r2=d_pipe_inner_r2);
             translate([-d_shape_offset-d_pipe_inner_r1, -d_pipe_inner_r1, 0])
-            cube([d_pipe_inner_r1, d_pipe_inner_r1*2, rack_height+$espsilon]);
+            cube([d_pipe_inner_r1, d_pipe_inner_r1*2, rack_height+$epsilon]);
         }
     }
 }
