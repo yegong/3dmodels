@@ -197,7 +197,7 @@ module dyson_d_pipe_vertical(center_offset) {
     }
 }
 
-translate([-100, -100, 5]) {
+translate([0, 0, 5]) {
     translate([0, 0, 0])
     dyson_d_pipe_vertical(center_offset = 25);
 
@@ -206,15 +206,6 @@ translate([-100, -100, 5]) {
 
     translate([0, 140, 0])
     dyson_d_pipe_vertical(center_offset = 25);
-    
-    translate([80, 0, 0])
-    dyson_d_pipe_vertical(center_offset = 25);
-
-    translate([80, 70, 0])
-    dyson_d_pipe_vertical(center_offset = 25);
-
-    translate([80, 140, 0])
-    dyson_d_pipe_vertical(center_offset = 40);
 }
 
 translate([0, 0, 0])
