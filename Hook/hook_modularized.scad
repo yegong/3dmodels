@@ -168,6 +168,22 @@ module flat_hook2(hook_offset, width, thickness, extra_height=0) {
     rounded_cube([thickness, width, height], round_radius);
 }
 
+module hook_hole_filler() {
+    thickness = 2;
+    height = 10;
+    space = 7.8;
+    cube([space, peg_radius*2, height]);
+    
+    translate([space, peg_radius, 0])
+    cylinder(h=height, r=peg_radius);
+    
+    translate([0, -5, 0])
+    cube([space+5, (peg_radius+5)*2, thickness]);
+    
+    translate([space/2, -2, thickness])
+    cube([2, (peg_radius+2)*2, 0.5]);
+}
+
 module dyson_d_pipe_vertical(center_offset) {
     thickness = 3;
     d_pipe_outer_radius = 35/2;
@@ -197,15 +213,17 @@ module dyson_d_pipe_vertical(center_offset) {
     }
 }
 
-translate([0, 0, 5]) {
+translate([0, 0, 2]) {
+
     translate([0, 0, 0])
     dyson_d_pipe_vertical(center_offset = 25);
-
+    
     translate([0, 70, 0])
     dyson_d_pipe_vertical(center_offset = 25);
 
     translate([0, 140, 0])
     dyson_d_pipe_vertical(center_offset = 25);
+
 }
 
 translate([0, 0, 0])
