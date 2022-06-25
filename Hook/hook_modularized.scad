@@ -81,7 +81,7 @@ module rounded_cylinder(h, r) {
  */
 module hook(extra_length=0) {
     peg1_length = 5;
-    peg2_length = board_thickness*3;
+    peg2_length = max(board_thickness*3, 5);
     peg1_angle = atan((peg_dist-board_thickness)/peg2_length);
     
     // Peg 1
