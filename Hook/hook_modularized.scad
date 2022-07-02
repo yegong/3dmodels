@@ -61,13 +61,15 @@ module rounded_cube(size, radius=0) {
 /**
  * Utility to create rounded cylinder (not centered)
  */
-module rounded_cylinder(h, r) {
+module rounded_cylinder(h, r, single=false) {
     union() {
-        translate([0, 0, r])
-        cylinder(h = h - 2*r, r=r);
+        translate([0, 0, single?0:r])
+        cylinder(h = h - (single?r:2*r), r=r);
         
-        translate([0, 0, r])
-        sphere(r = r);
+        if(!single) {
+            translate([0, 0, r])
+            sphere(r = r);
+        }
         
         translate([0, 0, h - r])
         sphere(r = r);
@@ -80,8 +82,8 @@ module rounded_cylinder(h, r) {
  * Direction: x-axis
  */
 module hook(extra_length=0) {
-    peg1_length = 5;
-    peg2_length = max(board_thickness*3, 5);
+    peg1_length = 7;
+    peg2_length = max(board_thickness*3, 7);
     peg1_angle = atan((peg_dist-board_thickness)/peg2_length);
     
     // Peg 1
@@ -91,7 +93,7 @@ module hook(extra_length=0) {
     
     translate([peg_radius+board_thickness, 0, peg_offset])
     rotate([0, 90 + peg1_angle, 0])
-    cylinder(h = peg1_length, r = peg_radius);
+    rounded_cylinder(h = peg1_length, r = peg_radius, single=true);
     
     translate([peg_radius+board_thickness, 0, peg_offset])
     sphere(r = peg_radius);
@@ -99,7 +101,7 @@ module hook(extra_length=0) {
     // Peg 2
     translate([-extra_length, 0, 0])
     rotate([0, 90, 0])
-    cylinder(h = peg2_length + extra_length, r = peg_radius);
+    rounded_cylinder(h = peg2_length + extra_length, r = peg_radius, single=true);
 }
 
 /* Position: z-axis
@@ -118,8 +120,8 @@ module simple_hook() {
     cylinder(h = peg_offset, r = peg_radius);
     
     // V Stabilizer
-    translate([peg_radius*0.5, -stabilizer_width/2, (peg_offset-stabilizer_height)*0.25])
-    rounded_cube([peg_radius*0.25, stabilizer_width, stabilizer_height], radius=peg_radius/4);
+    translate([peg_radius*0.5, -stabilizer_width*0.5, (peg_offset-stabilizer_height)*0.25])
+    rounded_cube([peg_radius*0.5, stabilizer_width, stabilizer_height], radius=peg_radius*0.125);
     
     // Connector 1
     translate([0, 0, peg_offset])
@@ -184,6 +186,41 @@ module hook_hole_filler() {
     cube([2, (peg_radius+2)*2, 0.5]);
 }
 
+module dyson_pipe_hook(hook_size) {
+    simple_hook();
+    hook_size_inner = hook_size;
+    hook_size_actual = hook_size + peg_radius;
+    
+    translate([-hook_size_actual, 0, 0])
+    rotate([-90, 0, 0])
+    rotate_extrude(angle = 195)
+    translate([hook_size_actual, 0, 0])
+    circle(r=peg_radius);
+}
+
+module dyson_v_hook(hook_angle, hook_size, hook_radius_size) {
+    simple_hook();
+    hook_radius_size_inner = hook_radius_size;
+    hook_radius_size_actual = hook_radius_size + peg_radius;
+    
+    translate([0, 0, -hook_size])
+    cylinder(h=hook_size, r=peg_radius);
+    
+    translate([-hook_radius_size_actual, 0, -hook_size])
+    rotate([-90, 0, 0])
+    rotate_extrude(angle = 180-hook_angle)
+    translate([hook_radius_size_actual, 0, 0])
+    circle(r=peg_radius);
+    
+    translate([
+        -hook_radius_size_actual-cos(hook_angle)*hook_radius_size_actual, 
+        0, 
+        -hook_size-sin(hook_angle)*hook_radius_size_actual,
+    ])
+    rotate([0, -hook_angle, 0])
+    rounded_cylinder(h=hook_size, r=peg_radius, single=true);
+}
+
 module dyson_d_pipe_vertical(center_offset) {
     thickness = 3;
     d_pipe_outer_radius = 35/2;
@@ -213,17 +250,30 @@ module dyson_d_pipe_vertical(center_offset) {
     }
 }
 
-translate([0, 0, 2]) {
-
-    translate([0, 0, 0])
-    dyson_d_pipe_vertical(center_offset = 25);
+translate([0, 0, 5]) {
+    translate([-50, -100, 0])
+    rotate([90, 0, 0])
+    dyson_pipe_hook(hook_size=25);
     
-    translate([0, 70, 0])
-    dyson_d_pipe_vertical(center_offset = 25);
-
-    translate([0, 140, 0])
-    dyson_d_pipe_vertical(center_offset = 25);
-
+    translate([50, -100, 0])
+    rotate([90, 0, 0])
+    dyson_pipe_hook(hook_size=25);
+    
+    translate([-50, 0, 0])
+    rotate([90, 0, 0])
+    dyson_pipe_hook(hook_size=25);
+    
+    translate([50, 0, 0])
+    rotate([90, 0, 0])
+    dyson_pipe_hook(hook_size=25);
+    
+    translate([-50, 100, 0])
+    rotate([90, 0, 0])
+    dyson_v_hook(hook_angle=22.5, hook_size=25, hook_radius_size=6);
+    
+    translate([50, 100, 0])
+    rotate([90, 0, 0])
+    dyson_v_hook(hook_angle=22.5, hook_size=25, hook_radius_size=6);
 }
 
 translate([0, 0, 0])
