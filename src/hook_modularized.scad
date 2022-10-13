@@ -6,7 +6,7 @@ use <utils.scad>;
 
 peg_radius = 2.45;
 board_thickness = 1;
-peg_dist = 25;
+peg_dist = 24.5;
 peg_offset = peg_dist + peg_radius * 2;
 peg_offset_v1 = 40;
 
@@ -184,35 +184,20 @@ module dyson_d_pipe_vertical(center_offset) {
     }
 }
 
-translate([0, 0, 5]) {
-    translate([-30, -60, 0])
-    rotate([90, 0, 0])
-    dyson_pipe_hook(hook_size=25);
-    
-    translate([40, -60, 0])
-    rotate([90, 0, 0])
-    dyson_pipe_hook(hook_size=25);
-    
-    translate([-30, 0, 0])
-    rotate([90, 0, 0])
-    dyson_pipe_hook(hook_size=25);
-    
-    translate([40, 0, 0])
-    rotate([90, 0, 0])
-    dyson_pipe_hook(hook_size=25);
-    
-    translate([-40, 60, 0])
-    rotate([90, 0, 0])
-    dyson_v_hook(hook_angle=22.5, hook_size=25, hook_radius_size=6);
-    
-    translate([0, 70, 0])
-    rotate([90, 0, 0])
-    dyson_v_hook(hook_angle=22.5, hook_size=25, hook_radius_size=6);
-    
-    translate([40, 60, 0])
-    rotate([90, 0, 0])
-    dyson_v_hook(hook_angle=22.5, hook_size=25, hook_radius_size=6);
-}
+// pipehook and vhooks
+/*
+rotate([90, 0, 0])
+dyson_pipe_hook(hook_size=25);
+
+rotate([90, 0, 0])
+dyson_v_hook(hook_angle=22.5, hook_size=25, hook_radius_size=6);
+
+translate([80, 0, 0])
+dyson_d_pipe_vertical(center_offset = 25);
+
+translate([80, 0, 0])
+dyson_d_pipe_vertical(center_offset = 40);
 
 translate([0, 0, 0])
 sphere(r=1);
+*/
