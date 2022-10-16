@@ -4,7 +4,7 @@ $epsilon = 0.01;
 
 use <utils.scad>;
 
-peg_radius = 2.45;
+peg_radius = 2.5;
 board_thickness = 1;
 peg_dist = 24.5;
 peg_offset = peg_dist + peg_radius * 2;
@@ -171,8 +171,12 @@ module dyson_d_pipe_vertical(center_offset) {
     rotate([0, 0, 180])
     flat_hook1(rack_flat_width, thickness, flat_extra_height);
     
-    translate([0,-rack_flat_width/2,0])
+    translate([0, -rack_flat_width/2, 0])
     rounded_cube([rack_flat_depth+round_radius*2, rack_flat_width, thickness], round_radius);
+    
+    translate([0, -thickness/2, thickness/2])
+    color("red")
+    rounded_cube([center_offset, thickness, thickness], round_radius);
     
     translate([center_offset+round_radius, 0, 0])
     union() {
@@ -192,10 +196,8 @@ dyson_pipe_hook(hook_size=25);
 rotate([90, 0, 0])
 dyson_v_hook(hook_angle=22.5, hook_size=25, hook_radius_size=6);
 
-translate([80, 0, 0])
 dyson_d_pipe_vertical(center_offset = 25);
 
-translate([80, 0, 0])
 dyson_d_pipe_vertical(center_offset = 40);
 
 translate([0, 0, 0])
