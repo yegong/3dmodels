@@ -1,5 +1,4 @@
 use <threadlib/threadlib.scad>
-use <smooth-prim/smooth_prim.scad>
 include <BOSL2/std.scad>
 
 $fs = 0.1;
