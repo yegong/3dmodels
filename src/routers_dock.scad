@@ -3,6 +3,7 @@ $fa = 3;
 $epsilon = 0.01;
 
 use <utils.scad>;
+include <BOSL2/std.scad>
 
 module cube_cut_corner(size, corner_size) {
     difference() {
@@ -189,13 +190,27 @@ module component_sep() {
         translate([$i * 1.1 * $dist, 0, 0]) {
             cube([$dist, 2*$dist, $dist]);
         }
-        translate([0, 2.1 * $dist, 0]) {
-            cube([$w4 - 2, $d4 - 2, 2]);
-        }
+    }
+    
+    translate([0, 2.1 * $dist, 0]) {
+        cube([$w4 - 2, $d4 - 2, 2]);
+    }
+}
+
+module component_sep2() {
+    difference() {
+        cube([$w4 - 1, $d4 - 1, 2], anchor = BOTTOM)
+            position(TOP) {
+                left(($w4-1)/2) cube([2.5, $d4 - 1, 13], anchor = BOTTOM + LEFT);
+                right(($w4-1)/2) cube([2.5, $d4 - 1, 13], anchor = BOTTOM + RIGHT);
+            };
+        
+        cube([$w4 - 16, $d4 - 24, 2], anchor = BOTTOM);
     }
 }
 
 //component_top();
 //component_bottom();
 //component_foot();
-component_sep();
+//component_sep();
+component_sep2();
