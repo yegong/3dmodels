@@ -5,6 +5,8 @@ $E2 = $E*2;
 
 include <BOSL2/std.scad>
 
+// 铝型材2020 45度端口保护盖
+
 sc=1.4142;
 
 prismoid(size1=[22 * sc, 20], size2=[22 * sc, 20], rounding=1, h=2, anchor=BOTTOM) {

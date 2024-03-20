@@ -5,6 +5,8 @@ $E2 = $E*2;
 
 include <BOSL2/std.scad>
 
+// 台磨吸尘组件
+
 width = 32;
 th = 2;
 th2 = th * 2;
@@ -71,4 +73,4 @@ module comp2() {
     }
 }
 
-comp2();
+comp1();

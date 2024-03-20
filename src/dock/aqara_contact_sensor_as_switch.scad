@@ -5,6 +5,8 @@ $E2 = $E*2;
 
 include <BOSL2/std.scad>
 
+// 把aqara door sensor作为开关
+
 
 module comp1() {
     diff() {

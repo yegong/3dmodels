@@ -5,6 +5,8 @@ $E2 = $E*2;
 
 include <BOSL2/std.scad>
 
+// 十字台钳
+
 module left_component() {
     diff() {
         cuboid([55, 15, 35], anchor=BOTTOM + FRONT) {
