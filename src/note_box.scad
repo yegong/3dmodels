@@ -1,12 +1,15 @@
+$fn= $preview ? 32 : 64;
+$fa = 3;
+$E = 0.01;
+$E2 = $E*2;
 include <BOSL2/std.scad>
 
-$fs = 0.1;
-$fa = 3;
+th = 2;
+th2 = th * 2;
+notes_size = 105;
+penstand_th = 15;
 
-notes_size = [99, 99, 20];
-thickness = 4;
-penstand_thickness = 15;
-
+/*
 difference() {
     fwd(penstand_thickness / 2)
     cuboid([notes_size[0] + thickness * 2, 
@@ -20,13 +23,9 @@ difference() {
             notes_size[2]],
             anchor=BOTTOM);
     
-    translate([0, -(notes_size[1] / 2 - 6), thickness])
-    cylinder(d1=20, d2=20, h=notes_size[2], anchor=BOTTOM);
-    
     translate([-(notes_size[0] / 2 - 7.8 / 2), -(notes_size[1] / 2 + penstand_thickness / 2 + thickness / 2), thickness])
-    cylinder(d1=2.8, d2=7.8, h=notes_size[2], anchor=BOTTOM);
-    
-    translate([0, -(notes_size[1] / 2 + penstand_thickness * 0.667), thickness])
-    cuboid([55, 1, notes_size[2]], anchor=BOTTOM);
+    cylinder(d1=3.8, d2=9, h=notes_size[2], anchor=BOTTOM);
 }
-    
+*/
+
+cuboid([notes_size + th2, notes_size + th2 + penstand_th, th]);
