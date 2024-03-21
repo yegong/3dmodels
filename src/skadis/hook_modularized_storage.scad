@@ -5,6 +5,8 @@ $E2 = $E*2;
 
 include <BOSL2/std.scad>
 
+// 储藏间IKEA孔，薄壁金属洞洞板
+
 peg_radius = 2.5;
 board_thickness = 1;
 peg_dist = 24.5;
@@ -48,13 +50,23 @@ module hook() {
  */
 module flat_hook1(width, thickness, extra_height=0) {
     rr = thickness/4;
-    height = peg_offset + peg_radius*2 + extra_height;
+    height = peg_offset + peg_radius*2 + extra_height + 2.1;
     
     // Flat
-    cuboid([width, thickness, height], rounding=rr, anchor=FRONT) {
-        up(extra_height/2-rr)
-        position(BACK)
-        hook();
+    color("red")
+    diff() {
+        cuboid([width, thickness, height], rounding=rr, anchor=FRONT) {
+            
+            up(extra_height/2-rr)
+            position(BACK)
+            hook();
+        
+            tag("remove")
+            up(3)
+            xrot(45)
+            position(BOTTOM)
+            cuboid([width + $E2, width, 5], anchor = BOTTOM);
+        }
     }
 }
 
@@ -122,4 +134,5 @@ module dyson_d_pipe_vertical(center_offset) {
     }
 }
 
-dyson_d_pipe_vertical(40);
+xrot(-45)
+dyson_d_pipe_vertical(25);
